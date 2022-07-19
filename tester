@@ -11,19 +11,23 @@ total=0
 
 make bonus
 
-while [ $i -lt 100 ]
+while [ $i -lt 1000 ]
 do
-	seq=$(seq 1 500 | gshuf | tr '\n' ' ')
+	seq=$(seq 1 5 | gshuf | tr '\n' ' ')
 	nb=$(./push_swap $seq)
-	#checker=$(./push_swap $seq | ./checker_bonus $seq)
+	checker=$(./push_swap $seq | ./checker_bonus $seq)
 	total=$(echo "$nb" | wc -l)
 
+	if [ $checker != "OK" ]
+	then
+		break 1
+	fi
 	if [ $total -gt $max ]
 	then
 		max=$total
 		maxseq=$seq
 	fi
-	if [ $total -gt 5500 ]
+	if [ $total -gt 12 ]
 	then
 		wrong=$(( $wrong + 1 ))
 		echo $seq
@@ -37,7 +41,7 @@ do
 	i=$(( $i + 1 ))
 done
 
-echo "average = $((average/100))"
+echo "average = $((average/1000))"
 echo "max = $max"
 echo "total wrong = $wrong"
 #echo "max seq=$maxseq"
