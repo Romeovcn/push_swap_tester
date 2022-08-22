@@ -13,7 +13,7 @@ make bonus
 
 while [ $i -lt 1000 ]
 do
-	seq=$(seq 1 5 | gshuf | tr '\n' ' ')
+	seq=$(seq 1 5 | shuf | tr '\n' ' ')
 	nb=$(./push_swap $seq)
 	checker=$(./push_swap $seq | ./checker_bonus $seq)
 	total=$(echo "$nb" | wc -l)
