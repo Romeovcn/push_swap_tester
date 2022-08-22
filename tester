@@ -15,7 +15,7 @@ while [ $i -lt 1000 ]
 do
 	seq=$(seq 1 5 | shuf | tr '\n' ' ')
 	nb=$(./push_swap $seq)
-	checker=$(./push_swap $seq | ./checker_bonus $seq)
+	checker=$(./push_swap $seq | ./checker $seq)
 	total=$(echo "$nb" | wc -l)
 
 	if [ $checker != "OK" ]
